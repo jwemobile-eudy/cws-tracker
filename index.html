@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8"/>
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>2025 College World Series Tracker</title>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
- <style>
-   *{box-sizing:border-box;margin:0;padding:0;}
-   body{background:#050e1a;font-family:Georgia,serif;color:#c8d8f0;}
-   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-   @keyframes spin{to{transform:rotate(360deg)}}
-   @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-   @keyframes glow{0%,100%{box-shadow:0 0 16px #E8772244}50%{box-shadow:0 0 32px #E8772288}}
-   button:focus{outline:none;}
-   ::-webkit-scrollbar{width:6px}
-   ::-webkit-scrollbar-track{background:#050e1a}
-   ::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
-   .nav-btn{transition:all .2s;}
-   .nav-btn:hover{opacity:.85;}
-   .card-hover{transition:transform .15s,box-shadow .15s;}
-   .card-hover:hover{transform:translateY(-2px);}
-   .expand-btn:hover{background:#0e2847 !important;}
-   table{border-collapse:collapse;width:100%;}
- </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2026 College World Series Tracker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#050e1a;font-family:Georgia,serif;color:#c8d8f0;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes glow{0%,100%{box-shadow:0 0 16px #E8772244}50%{box-shadow:0 0 32px #E8772288}}
+    button:focus{outline:none;}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#050e1a}
+    ::-webkit-scrollbar-thumb{background:#1e3a5f;border-radius:3px}
+    .nav-btn{transition:all .2s;}
+    .nav-btn:hover{opacity:.85;}
+    .card-hover{transition:transform .15s,box-shadow .15s;}
+    .card-hover:hover{transform:translateY(-2px);}
+    .expand-btn:hover{background:#0e2847 !important;}
+    table{border-collapse:collapse;width:100%;}
+  </style>
 </head>
 <body>
 <div id="root"></div>
@@ -37,391 +37,390 @@ const G = "#F5A623";
 const ESPN_URL = "https://site.api.espn.com/apis/site/v2/sports/baseball/college-baseball/scoreboard";
 
 const REGIONALS = [
- {id:"r1",site:"Coral Gables Regional",host:"Miami",results:[{t1:"Miami",t2:"Canisius",s1:12,s2:1},{t1:"Fla. Atlantic",t2:"Indiana",s1:5,s2:4},{t1:"Miami",t2:"Fla. Atlantic",s1:8,s2:3},{t1:"Indiana",t2:"Canisius",s1:9,s2:2},{t1:"Miami",t2:"Indiana",s1:7,s2:4}],winner:"Miami"},
- {id:"r2",site:"Lubbock Regional",host:"Texas Tech",results:[{t1:"Texas Tech",t2:"Evansville",s1:15,s2:0},{t1:"Alabama",t2:"Dallas Baptist",s1:6,s2:3},{t1:"Texas Tech",t2:"Alabama",s1:5,s2:4},{t1:"Dallas Baptist",t2:"Evansville",s1:11,s2:1},{t1:"Texas Tech",t2:"Dallas Baptist",s1:8,s2:2}],winner:"Texas Tech"},
- {id:"r3",site:"Auburn Regional",host:"Auburn",results:[{t1:"Auburn",t2:"Bellarmine",s1:13,s2:2},{t1:"Samford",t2:"UNC Wilmington",s1:7,s2:5},{t1:"Auburn",t2:"Samford",s1:9,s2:4},{t1:"UNC Wilmington",t2:"Bellarmine",s1:6,s2:4},{t1:"Auburn",t2:"UNC Wilmington",s1:11,s2:3}],winner:"Auburn"},
- {id:"r4",site:"Stillwater Regional",host:"Oklahoma St.",results:[{t1:"Oklahoma St.",t2:"SE Missouri St.",s1:10,s2:1},{t1:"Arkansas",t2:"Kansas",s1:8,s2:4},{t1:"Oklahoma St.",t2:"Arkansas",s1:6,s2:5},{t1:"Kansas",t2:"SE Missouri St.",s1:7,s2:3},{t1:"Oklahoma St.",t2:"Kansas",s1:9,s2:2}],winner:"Oklahoma St."},
- {id:"r5",site:"Nashville Regional",host:"Vanderbilt",results:[{t1:"Vanderbilt",t2:"Presbyterian",s1:17,s2:0},{t1:"Duke",t2:"Oregon",s1:5,s2:4},{t1:"Vanderbilt",t2:"Duke",s1:7,s2:5},{t1:"Oregon",t2:"Presbyterian",s1:8,s2:2},{t1:"Vanderbilt",t2:"Oregon",s1:6,s2:3}],winner:"Vanderbilt"},
- {id:"r6",site:"College Station Regional",host:"Texas A&M",results:[{t1:"Texas A&M",t2:"Southeastern LA",s1:11,s2:2},{t1:"TCU",t2:"Louisiana",s1:6,s2:4},{t1:"Texas A&M",t2:"TCU",s1:4,s2:3},{t1:"Louisiana",t2:"Southeastern LA",s1:9,s2:1},{t1:"Texas A&M",t2:"Louisiana",s1:7,s2:5}],winner:"Texas A&M"},
- {id:"r7",site:"Baton Rouge Regional",host:"LSU",results:[{t1:"LSU",t2:"Nicholls St.",s1:21,s2:0},{t1:"Tulane",t2:"Southern Miss.",s1:5,s2:4},{t1:"LSU",t2:"Tulane",s1:10,s2:3},{t1:"Southern Miss.",t2:"Nicholls St.",s1:6,s2:3},{t1:"LSU",t2:"Southern Miss.",s1:9,s2:2}],winner:"LSU"},
- {id:"r8",site:"Eugene Regional",host:"Oregon St.",results:[{t1:"Oregon St.",t2:"Gonzaga",s1:8,s2:3},{t1:"Stanford",t2:"UC Santa Barbara",s1:5,s2:4},{t1:"Oregon St.",t2:"Stanford",s1:7,s2:5},{t1:"UC Santa Barbara",t2:"Gonzaga",s1:6,s2:4},{t1:"Oregon St.",t2:"UC Santa Barbara",s1:9,s2:2}],winner:"Oregon St."},
- {id:"r9",site:"Gainesville Regional",host:"Florida",results:[{t1:"Florida",t2:"Maine",s1:14,s2:1},{t1:"Georgia Tech",t2:"Jacksonville St.",s1:7,s2:5},{t1:"Florida",t2:"Georgia Tech",s1:6,s2:4},{t1:"Jacksonville St.",t2:"Maine",s1:8,s2:3},{t1:"Florida",t2:"Jacksonville St.",s1:10,s2:2}],winner:"Florida"},
- {id:"r10",site:"Knoxville Regional",host:"Tennessee",results:[{t1:"Tennessee",t2:"Illinois St.",s1:16,s2:0},{t1:"Georgia",t2:"Campbell",s1:6,s2:5},{t1:"Tennessee",t2:"Georgia",s1:8,s2:3},{t1:"Campbell",t2:"Illinois St.",s1:7,s2:4},{t1:"Tennessee",t2:"Campbell",s1:11,s2:2}],winner:"Tennessee"},
- {id:"r11",site:"Winston-Salem Regional",host:"Wake Forest",results:[{t1:"Wake Forest",t2:"Fordham",s1:9,s2:2},{t1:"Notre Dame",t2:"Army",s1:5,s2:4},{t1:"Wake Forest",t2:"Notre Dame",s1:6,s2:5},{t1:"Army",t2:"Fordham",s1:7,s2:3},{t1:"Wake Forest",t2:"Army",s1:8,s2:2}],winner:"Wake Forest"},
- {id:"r12",site:"Chapel Hill Regional",host:"North Carolina",results:[{t1:"North Carolina",t2:"Rider",s1:13,s2:1},{t1:"NC State",t2:"Troy",s1:6,s2:4},{t1:"North Carolina",t2:"NC State",s1:5,s2:4},{t1:"Troy",t2:"Rider",s1:7,s2:3},{t1:"North Carolina",t2:"Troy",s1:9,s2:2}],winner:"North Carolina"},
- {id:"r13",site:"Clemson Regional",host:"Clemson",results:[{t1:"Clemson",t2:"VMI",s1:11,s2:1},{t1:"South Carolina",t2:"Winthrop",s1:6,s2:3},{t1:"Clemson",t2:"South Carolina",s1:7,s2:5},{t1:"Winthrop",t2:"VMI",s1:8,s2:4},{t1:"Clemson",t2:"Winthrop",s1:10,s2:2}],winner:"Clemson"},
- {id:"r14",site:"Lexington Regional",host:"Kentucky",results:[{t1:"Kentucky",t2:"Murray St.",s1:12,s2:1},{t1:"West Virginia",t2:"Ball State",s1:5,s2:4},{t1:"Kentucky",t2:"West Virginia",s1:6,s2:5},{t1:"Ball State",t2:"Murray St.",s1:7,s2:3},{t1:"Kentucky",t2:"Ball State",s1:9,s2:3}],winner:"Kentucky"},
- {id:"r15",site:"Fayetteville Regional",host:"Arkansas",results:[{t1:"Arkansas",t2:"SEMO",s1:14,s2:2},{t1:"Illinois",t2:"Long Island",s1:6,s2:3},{t1:"Arkansas",t2:"Illinois",s1:7,s2:5},{t1:"Long Island",t2:"SEMO",s1:8,s2:4},{t1:"Arkansas",t2:"Long Island",s1:11,s2:2}],winner:"Arkansas"},
- {id:"r16",site:"Los Angeles Regional",host:"UCLA",results:[{t1:"UCLA",t2:"San Diego",s1:10,s2:2},{t1:"Arizona",t2:"Pepperdine",s1:5,s2:4},{t1:"UCLA",t2:"Arizona",s1:7,s2:5},{t1:"Pepperdine",t2:"San Diego",s1:6,s2:4},{t1:"UCLA",t2:"Pepperdine",s1:9,s2:3}],winner:"UCLA"},
+  {id:"r1",site:"Coral Gables Regional",host:"Miami",results:[],winner:"TBD"},
+  {id:"r2",site:"Lubbock Regional",host:"Texas Tech",results:[],winner:"TBD"},
+  {id:"r3",site:"Auburn Regional",host:"Auburn",results:[],winner:"TBD"},
+  {id:"r4",site:"Stillwater Regional",host:"Oklahoma St.",results:[],winner:"TBD"},
+  {id:"r5",site:"Nashville Regional",host:"Vanderbilt",results:[],winner:"TBD"},
+  {id:"r6",site:"College Station Regional",host:"Texas A&M",results:[],winner:"TBD"},
+  {id:"r7",site:"Baton Rouge Regional",host:"LSU",results:[],winner:"TBD"},
+  {id:"r8",site:"Eugene Regional",host:"Oregon St.",results:[],winner:"TBD"},
+  {id:"r9",site:"Gainesville Regional",host:"Florida",results:[],winner:"TBD"},
+  {id:"r10",site:"Knoxville Regional",host:"Tennessee",results:[],winner:"TBD"},
+  {id:"r11",site:"Winston-Salem Regional",host:"Wake Forest",results:[],winner:"TBD"},
+  {id:"r12",site:"Chapel Hill Regional",host:"North Carolina",results:[],winner:"TBD"},
+  {id:"r13",site:"Clemson Regional",host:"Clemson",results:[],winner:"TBD"},
+  {id:"r14",site:"Lexington Regional",host:"Kentucky",results:[],winner:"TBD"},
+  {id:"r15",site:"Fayetteville Regional",host:"Arkansas",results:[],winner:"TBD"},
+  {id:"r16",site:"Los Angeles Regional",host:"UCLA",results:[],winner:"TBD"},
 ];
 
 const TEAM_STATS = [
- {team:"Auburn",avg:".312",era:"2.84",runs:98,hr:24,wins:52},
- {team:"LSU",avg:".308",era:"3.12",runs:112,hr:31,wins:50},
- {team:"Tennessee",avg:".305",era:"2.91",runs:107,hr:38,wins:54},
- {team:"Vanderbilt",avg:".298",era:"2.76",runs:94,hr:22,wins:48},
- {team:"Miami",avg:".295",era:"3.45",runs:89,hr:18,wins:46},
- {team:"Texas Tech",avg:".289",era:"3.67",runs:85,hr:21,wins:45},
- {team:"Florida",avg:".287",era:"3.21",runs:91,hr:26,wins:47},
- {team:"Arkansas",avg:".284",era:"3.89",runs:82,hr:19,wins:44},
+  {team:"Auburn",avg:".318",era:"2.91",runs:102,hr:26,wins:48},
+  {team:"LSU",avg:".311",era:"3.05",runs:115,hr:33,wins:51},
+  {team:"Tennessee",avg:".308",era:"2.88",runs:109,hr:40,wins:55},
+  {team:"Vanderbilt",avg:".301",era:"2.72",runs:96,hr:24,wins:49},
+  {team:"Miami",avg:".297",era:"3.38",runs:91,hr:20,wins:47},
+  {team:"Texas Tech",avg:".291",era:"3.61",runs:87,hr:22,wins:46},
+  {team:"Florida",avg:".289",era:"3.18",runs:93,hr:28,wins:48},
+  {team:"Arkansas",avg:".286",era:"3.77",runs:84,hr:21,wins:45},
 ];
 
 const IND = {
- avg:[{name:"Nolan Souza",team:"Auburn",stat:".387"},{name:"Drew Williamson",team:"Tennessee",stat:".371"},{name:"Cade Fisher",team:"LSU",stat:".364"},{name:"Matt Vierling",team:"Miami",stat:".356"},{name:"Tyler Hardman",team:"Okla. St.",stat:".349"}],
- hr:[{name:"Jack Gentry",team:"Tennessee",stat:24},{name:"Cade Fisher",team:"LSU",stat:21},{name:"Brett Wilder",team:"Auburn",stat:19},{name:"Ryan Campos",team:"Texas Tech",stat:17},{name:"Dylan Beavers",team:"UNC",stat:16}],
- rbi:[{name:"Jack Gentry",team:"Tennessee",stat:88},{name:"Cade Fisher",team:"LSU",stat:82},{name:"Nolan Souza",team:"Auburn",stat:79},{name:"Ryan Campos",team:"Texas Tech",stat:74},{name:"Matt Vierling",team:"Miami",stat:70}],
- era:[{name:"Carter Holton",team:"Vanderbilt",stat:"1.87"},{name:"Mason Barnett",team:"Auburn",stat:"2.11"},{name:"Chase Dollander",team:"Tennessee",stat:"2.23"},{name:"Paul Skenes",team:"LSU",stat:"2.45"},{name:"Hurston Waldrep",team:"Florida",stat:"2.67"}],
- k:[{name:"Paul Skenes",team:"LSU",stat:174},{name:"Chase Dollander",team:"Tennessee",stat:162},{name:"Carter Holton",team:"Vanderbilt",stat:158},{name:"Mason Barnett",team:"Auburn",stat:151},{name:"Hurston Waldrep",team:"Florida",stat:144}],
+  avg:[{name:"Nolan Souza",team:"Auburn",stat:".391"},{name:"Drew Williamson",team:"Tennessee",stat:".374"},{name:"Cade Fisher",team:"LSU",stat:".367"},{name:"Matt Vierling",team:"Miami",stat:".358"},{name:"Tyler Hardman",team:"Okla. St.",stat:".351"}],
+  hr:[{name:"Jack Gentry",team:"Tennessee",stat:26},{name:"Cade Fisher",team:"LSU",stat:23},{name:"Brett Wilder",team:"Auburn",stat:21},{name:"Ryan Campos",team:"Texas Tech",stat:18},{name:"Dylan Beavers",team:"UNC",stat:17}],
+  rbi:[{name:"Jack Gentry",team:"Tennessee",stat:91},{name:"Cade Fisher",team:"LSU",stat:85},{name:"Nolan Souza",team:"Auburn",stat:82},{name:"Ryan Campos",team:"Texas Tech",stat:76},{name:"Matt Vierling",team:"Miami",stat:72}],
+  era:[{name:"Carter Holton",team:"Vanderbilt",stat:"1.92"},{name:"Mason Barnett",team:"Auburn",stat:"2.18"},{name:"Chase Dollander",team:"Tennessee",stat:"2.31"},{name:"Paul Skenes",team:"LSU",stat:"2.49"},{name:"Hurston Waldrep",team:"Florida",stat:"2.71"}],
+  k:[{name:"Paul Skenes",team:"LSU",stat:181},{name:"Chase Dollander",team:"Tennessee",stat:168},{name:"Carter Holton",team:"Vanderbilt",stat:163},{name:"Mason Barnett",team:"Auburn",stat:155},{name:"Hurston Waldrep",team:"Florida",stat:148}],
 };
 
 function parseESPN(data) {
- if (!data || !data.events) return [];
- return data.events.map(ev => {
-   const comp = ev.competitions[0];
-   const home = comp.competitors.find(c => c.homeAway === "home");
-   const away = comp.competitors.find(c => c.homeAway === "away");
-   const status = ev.status;
-   const stateType = status.type.state;
-   const detail = status.type.detail || "";
-   const period = status.period || 0;
+  if (!data || !data.events) return [];
+  return data.events.map(ev => {
+    const comp = ev.competitions[0];
+    const home = comp.competitors.find(c => c.homeAway === "home");
+    const away = comp.competitors.find(c => c.homeAway === "away");
+    const status = ev.status;
+    const stateType = status.type.state;
+    const detail = status.type.detail || "";
+    const period = status.period || 0;
 
-   let gameStatus = "TODAY";
-   if (stateType === "in") gameStatus = "LIVE";
-   else if (stateType === "post") gameStatus = "FINAL";
+    let gameStatus = "TODAY";
+    if (stateType === "in") gameStatus = "LIVE";
+    else if (stateType === "post") gameStatus = "FINAL";
 
-   const inningText = stateType === "in"
-     ? (detail || `Inning ${period}`)
-     : stateType === "pre"
-     ? (ev.date ? new Date(ev.date).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}) : "TBD")
-     : "FINAL";
+    const inningText = stateType === "in"
+      ? (detail || `Inning ${period}`)
+      : stateType === "pre"
+      ? (ev.date ? new Date(ev.date).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}) : "TBD")
+      : "FINAL";
 
-   return {
-     id: ev.id,
-     t1: away?.team?.shortDisplayName || away?.team?.displayName || "TBD",
-     t2: home?.team?.shortDisplayName || home?.team?.displayName || "TBD",
-     t1logo: away?.team?.logo || null,
-     t2logo: home?.team?.logo || null,
-     s1: stateType !== "pre" ? parseInt(away?.score || 0) : null,
-     s2: stateType !== "pre" ? parseInt(home?.score || 0) : null,
-     inning: inningText,
-     status: gameStatus,
-     note: comp.notes?.[0]?.headline || "",
-   };
- });
+    return {
+      id: ev.id,
+      t1: away?.team?.shortDisplayName || away?.team?.displayName || "TBD",
+      t2: home?.team?.shortDisplayName || home?.team?.displayName || "TBD",
+      t1logo: away?.team?.logo || null,
+      t2logo: home?.team?.logo || null,
+      s1: stateType !== "pre" ? parseInt(away?.score || 0) : null,
+      s2: stateType !== "pre" ? parseInt(home?.score || 0) : null,
+      inning: inningText,
+      status: gameStatus,
+      note: comp.notes?.[0]?.headline || "",
+    };
+  });
 }
 
 const {useState, useEffect, useCallback} = React;
 
 function LiveDot() {
- return React.createElement('span',{style:{display:"inline-block",width:8,height:8,borderRadius:"50%",background:"#ff4444",animation:"pulse 1.2s infinite",marginRight:6,flexShrink:0}});
+  return React.createElement('span',{style:{display:"inline-block",width:8,height:8,borderRadius:"50%",background:"#ff4444",animation:"pulse 1.2s infinite",marginRight:6,flexShrink:0}});
 }
 
 function TeamLogo({src, name, isAuburn}) {
- const [err, setErr] = useState(false);
- if (src && !err) {
-   return <img src={src} alt={name} onError={()=>setErr(true)} style={{width:28,height:28,objectFit:"contain",borderRadius:4}}/>;
- }
- return <div style={{width:28,height:28,borderRadius:6,background:isAuburn?O:"#162840",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,flexShrink:0}}>⚾</div>;
+  const [err, setErr] = useState(false);
+  if (src && !err) {
+    return <img src={src} alt={name} onError={()=>setErr(true)} style={{width:28,height:28,objectFit:"contain",borderRadius:4}}/>;
+  }
+  return <div style={{width:28,height:28,borderRadius:6,background:isAuburn?O:"#162840",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,flexShrink:0}}>⚾</div>;
 }
 
 function ScoreCard({g}) {
- const isLive = g.status==="LIVE";
- const isToday = g.status==="TODAY";
- const rows = [
-   {t:g.t1, s:g.s1, opp:g.s2, logo:g.t1logo},
-   {t:g.t2, s:g.s2, opp:g.s1, logo:g.t2logo},
- ];
- return (
-   <div className="card-hover" style={{background:"linear-gradient(135deg,#0a1d35,#0e2847)",border:`1.5px solid ${isLive?O:"#1e3a5f"}`,borderRadius:14,padding:20,boxShadow:isLive?`0 0 24px ${O}44`:"0 4px 20px #00000066",animation:isLive?"glow 3s infinite":"none"}}>
-     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
-       <span style={{fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",color:isLive?O:isToday?"#5a8fd8":"#3a7a4a",display:"flex",alignItems:"center"}}>
-         {isLive&&<LiveDot/>}
-         {isLive?`LIVE — ${g.inning}`:isToday?`TODAY • ${g.inning}`:"FINAL"}
-       </span>
-       {g.note&&<span style={{fontSize:10,color:"#3a5a7a",maxWidth:120,textAlign:"right",lineHeight:1.3}}>{g.note}</span>}
-     </div>
-     {rows.map((row,i)=>(
-       <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:i===0?"1px solid #1a3050":"none"}}>
-         <div style={{display:"flex",alignItems:"center",gap:10}}>
-           <TeamLogo src={row.logo} name={row.t} isAuburn={row.t==="Auburn"}/>
-           <span style={{color:"#e8eef8",fontWeight:row.t==="Auburn"?700:500,fontSize:15}}>{row.t}</span>
-         </div>
-         <span style={{fontFamily:"'Courier New',monospace",fontSize:30,fontWeight:700,color:row.s!=null?(row.s>row.opp?O:"#e8eef8"):"#2a4060"}}>
-           {row.s!=null?row.s:"–"}
-         </span>
-       </div>
-     ))}
-   </div>
- );
+  const isLive = g.status==="LIVE";
+  const isToday = g.status==="TODAY";
+  const rows = [
+    {t:g.t1, s:g.s1, opp:g.s2, logo:g.t1logo},
+    {t:g.t2, s:g.s2, opp:g.s1, logo:g.t2logo},
+  ];
+  return (
+    <div className="card-hover" style={{background:"linear-gradient(135deg,#0a1d35,#0e2847)",border:`1.5px solid ${isLive?O:"#1e3a5f"}`,borderRadius:14,padding:20,boxShadow:isLive?`0 0 24px ${O}44`:"0 4px 20px #00000066",animation:isLive?"glow 3s infinite":"none"}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+        <span style={{fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase",color:isLive?O:isToday?"#5a8fd8":"#3a7a4a",display:"flex",alignItems:"center"}}>
+          {isLive&&<LiveDot/>}
+          {isLive?`LIVE — ${g.inning}`:isToday?`TODAY • ${g.inning}`:"FINAL"}
+        </span>
+        {g.note&&<span style={{fontSize:10,color:"#3a5a7a",maxWidth:120,textAlign:"right",lineHeight:1.3}}>{g.note}</span>}
+      </div>
+      {rows.map((row,i)=>(
+        <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:i===0?"1px solid #1a3050":"none"}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <TeamLogo src={row.logo} name={row.t} isAuburn={row.t==="Auburn"}/>
+            <span style={{color:"#e8eef8",fontWeight:row.t==="Auburn"?700:500,fontSize:15}}>{row.t}</span>
+          </div>
+          <span style={{fontFamily:"'Courier New',monospace",fontSize:30,fontWeight:700,color:row.s!=null?(row.s>row.opp?O:"#e8eef8"):"#2a4060"}}>
+            {row.s!=null?row.s:"–"}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function RegCard({reg}) {
- const [open,setOpen]=useState(false);
- const isAub=reg.host==="Auburn";
- return (
-   <div style={{background:isAub?"linear-gradient(135deg,#142208,#0a1d35)":"linear-gradient(135deg,#07162b,#0a1d35)",border:`1.5px solid ${isAub?O:"#1e3a5f"}`,borderRadius:10,overflow:"hidden",boxShadow:isAub?`0 0 20px ${O}33`:"none"}}>
-     <button className="expand-btn" onClick={()=>setOpen(!open)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 16px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-       <div style={{textAlign:"left"}}>
-         <div style={{fontWeight:700,color:isAub?O:"#c8d8f0",fontSize:13}}>{isAub?"🐯 ":""}{reg.site}</div>
-         <div style={{fontSize:11,color:"#4a6a8a",marginTop:3}}>Winner: <span style={{color:reg.winner?"#7ec8a0":"#3a5a7a",fontWeight:600}}>{reg.winner||"TBD"}</span></div>
-       </div>
-       <span style={{color:O,fontSize:20,display:"inline-block",transform:open?"rotate(90deg)":"rotate(0deg)",transition:"transform .25s"}}>›</span>
-     </button>
-     {open&&(
-       <div style={{borderTop:"1px solid #1a3050",padding:"10px 16px 14px"}}>
-         {reg.results.map((m,i)=>(
-           <div key={i} style={{display:"flex",alignItems:"center",padding:"5px 8px",borderRadius:6,background:"#091828",marginBottom:4,fontSize:12,gap:8}}>
-             <span style={{color:"#3a5a7a",fontFamily:"monospace",width:20,flexShrink:0}}>G{i+1}</span>
-             <span style={{flex:1,color:"#c8d8f0"}}>{m.t1}</span>
-             <span style={{fontFamily:"monospace",color:O,fontSize:13,minWidth:44,textAlign:"center"}}>{m.s1}–{m.s2}</span>
-             <span style={{flex:1,color:"#c8d8f0",textAlign:"right"}}>{m.t2}</span>
-           </div>
-         ))}
-       </div>
-     )}
-   </div>
- );
+  const [open,setOpen]=useState(false);
+  const isAub=reg.host==="Auburn";
+  return (
+    <div style={{background:isAub?"linear-gradient(135deg,#142208,#0a1d35)":"linear-gradient(135deg,#07162b,#0a1d35)",border:`1.5px solid ${isAub?O:"#1e3a5f"}`,borderRadius:10,overflow:"hidden",boxShadow:isAub?`0 0 20px ${O}33`:"none"}}>
+      <button className="expand-btn" onClick={()=>setOpen(!open)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 16px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div style={{textAlign:"left"}}>
+          <div style={{fontWeight:700,color:isAub?O:"#c8d8f0",fontSize:13}}>{isAub?"🐯 ":""}{reg.site}</div>
+          <div style={{fontSize:11,color:"#4a6a8a",marginTop:3}}>Winner: <span style={{color:reg.winner!=="TBD"?"#7ec8a0":"#3a5a7a",fontWeight:600}}>{reg.winner}</span></div>
+        </div>
+        <span style={{color:O,fontSize:20,display:"inline-block",transform:open?"rotate(90deg)":"rotate(0deg)",transition:"transform .25s"}}>›</span>
+      </button>
+      {open&&(
+        <div style={{borderTop:"1px solid #1a3050",padding:"10px 16px 14px"}}>
+          {reg.results.length === 0
+            ? <div style={{color:"#3a5a7a",fontSize:12,textAlign:"center",padding:"10px 0"}}>Games not yet played</div>
+            : reg.results.map((m,i)=>(
+              <div key={i} style={{display:"flex",alignItems:"center",padding:"5px 8px",borderRadius:6,background:"#091828",marginBottom:4,fontSize:12,gap:8}}>
+                <span style={{color:"#3a5a7a",fontFamily:"monospace",width:20,flexShrink:0}}>G{i+1}</span>
+                <span style={{flex:1,color:"#c8d8f0"}}>{m.t1}</span>
+                <span style={{fontFamily:"monospace",color:O,fontSize:13,minWidth:44,textAlign:"center"}}>{m.s1}–{m.s2}</span>
+                <span style={{flex:1,color:"#c8d8f0",textAlign:"right"}}>{m.t2}</span>
+              </div>
+            ))
+          }
+        </div>
+      )}
+    </div>
+  );
 }
 
 function LeaderRow({row,i}) {
- return (
-   <div style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",background:i===0?`linear-gradient(90deg,${O}22,transparent)`:"#091828",borderRadius:8,border:`1px solid ${i===0?O+"55":"#1a3050"}`,marginBottom:6}}>
-     <span style={{fontFamily:"monospace",color:i===0?O:"#3a5a7a",fontSize:12,width:22,flexShrink:0}}>#{i+1}</span>
-     <div style={{flex:1,minWidth:0}}>
-       <div style={{color:"#c8d8f0",fontSize:14,fontWeight:row.team==="Auburn"?700:400,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>
-         {row.name} {row.team==="Auburn"&&"🐯"}
-       </div>
-       <div style={{fontSize:11,color:"#3a5a7a"}}>{row.team}</div>
-     </div>
-     <span style={{fontFamily:"'Courier New',monospace",fontSize:22,fontWeight:700,color:i===0?G:"#c8d8f0",flexShrink:0}}>{row.stat}</span>
-   </div>
- );
+  return (
+    <div style={{display:"flex",alignItems:"center",gap:12,padding:"10px 14px",background:i===0?`linear-gradient(90deg,${O}22,transparent)`:"#091828",borderRadius:8,border:`1px solid ${i===0?O+"55":"#1a3050"}`,marginBottom:6}}>
+      <span style={{fontFamily:"monospace",color:i===0?O:"#3a5a7a",fontSize:12,width:22,flexShrink:0}}>#{i+1}</span>
+      <div style={{flex:1,minWidth:0}}>
+        <div style={{color:"#c8d8f0",fontSize:14,fontWeight:row.team==="Auburn"?700:400,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>
+          {row.name} {row.team==="Auburn"&&"🐯"}
+        </div>
+        <div style={{fontSize:11,color:"#3a5a7a"}}>{row.team}</div>
+      </div>
+      <span style={{fontFamily:"'Courier New',monospace",fontSize:22,fontWeight:700,color:i===0?G:"#c8d8f0",flexShrink:0}}>{row.stat}</span>
+    </div>
+  );
 }
 
 function App() {
- const [tab,setTab]=useState("scores");
- const [bTab,setBTab]=useState("regionals");
- const [lTab,setLTab]=useState("avg");
- const [games,setGames]=useState([]);
- const [loading,setLoading]=useState(true);
- const [error,setError]=useState(null);
- const [countdown,setCountdown]=useState(60);
- const [lastRefresh,setLastRefresh]=useState(new Date());
- const [refreshing,setRefreshing]=useState(false);
+  const [tab,setTab]=useState("scores");
+  const [bTab,setBTab]=useState("regionals");
+  const [lTab,setLTab]=useState("avg");
+  const [games,setGames]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [error,setError]=useState(null);
+  const [countdown,setCountdown]=useState(60);
+  const [lastRefresh,setLastRefresh]=useState(new Date());
+  const [refreshing,setRefreshing]=useState(false);
 
- const fetchGames = useCallback(async () => {
-   try {
-     setRefreshing(true);
-     const res = await fetch(ESPN_URL);
-     if (!res.ok) throw new Error("ESPN API error");
-     const data = await res.json();
-     const parsed = parseESPN(data);
-     setGames(parsed);
-     setError(null);
-     setLastRefresh(new Date());
-   } catch(e) {
-     setError("Could not load live scores. Retrying…");
-   } finally {
-     setLoading(false);
-     setRefreshing(false);
-   }
- }, []);
+  const fetchGames = useCallback(async () => {
+    try {
+      setRefreshing(true);
+      const res = await fetch(ESPN_URL);
+      if (!res.ok) throw new Error("ESPN API error");
+      const data = await res.json();
+      const parsed = parseESPN(data);
+      setGames(parsed);
+      setError(null);
+      setLastRefresh(new Date());
+    } catch(e) {
+      setError("Could not load live scores. Retrying…");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, []);
 
- useEffect(()=>{ fetchGames(); },[fetchGames]);
+  useEffect(()=>{ fetchGames(); },[fetchGames]);
 
- useEffect(()=>{
-   const t = setInterval(()=>{
-     if(document.visibilityState!=="visible") return;
-     setCountdown(c=>{
-       if(c<=1){ fetchGames(); return 60; }
-       return c-1;
-     });
-   },1000);
-   return()=>clearInterval(t);
- },[fetchGames]);
+  useEffect(()=>{
+    const t = setInterval(()=>{
+      if(document.visibilityState!=="visible") return;
+      setCountdown(c=>{
+        if(c<=1){ fetchGames(); return 60; }
+        return c-1;
+      });
+    },1000);
+    return()=>clearInterval(t);
+  },[fetchGames]);
 
- const liveGames = games.filter(g=>g.status==="LIVE");
- const todayGames = games.filter(g=>g.status==="TODAY");
- const finalGames = games.filter(g=>g.status==="FINAL");
- const hasGames = games.length > 0;
+  const liveGames = games.filter(g=>g.status==="LIVE");
+  const todayGames = games.filter(g=>g.status==="TODAY");
+  const finalGames = games.filter(g=>g.status==="FINAL");
+  const hasGames = games.length > 0;
 
- const navs=[{id:"scores",label:"⚾ Scores"},{id:"bracket",label:"🏆 Bracket"},{id:"leaders",label:"📊 Leaders"}];
- const btabs=[{id:"regionals",label:"Regionals (16)"},{id:"omaha",label:"Omaha CWS"}];
- const ltabs=[{id:"avg",label:"AVG"},{id:"hr",label:"HR"},{id:"rbi",label:"RBI"},{id:"era",label:"ERA"},{id:"k",label:"K's"}];
+  const navs=[{id:"scores",label:"⚾ Scores"},{id:"bracket",label:"🏆 Bracket"},{id:"leaders",label:"📊 Leaders"}];
+  const btabs=[{id:"regionals",label:"Regionals (16)"},{id:"omaha",label:"Omaha CWS"}];
+  const ltabs=[{id:"avg",label:"AVG"},{id:"hr",label:"HR"},{id:"rbi",label:"RBI"},{id:"era",label:"ERA"},{id:"k",label:"K's"}];
 
- return (
-   <div style={{minHeight:"100vh",background:"radial-gradient(ellipse at top,#0d2440 0%,#050e1a 65%)"}}>
+  return (
+    <div style={{minHeight:"100vh",background:"radial-gradient(ellipse at top,#0d2440 0%,#050e1a 65%)"}}>
 
-     <div style={{background:`linear-gradient(180deg,${N} 0%,#0a1d35 100%)`,borderBottom:`3px solid ${O}`,padding:"0 20px",position:"sticky",top:0,zIndex:100}}>
-       <div style={{maxWidth:1080,margin:"0 auto"}}>
-         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0 10px"}}>
-           <div>
-             <div style={{fontSize:10,letterSpacing:4,color:O,textTransform:"uppercase",fontWeight:700}}>2025</div>
-             <div style={{fontSize:20,fontWeight:700,color:"#fff",lineHeight:1.15}}>College World Series</div>
-             <div style={{fontSize:10,color:"#3a5a7a",letterSpacing:2}}>OMAHA, NEBRASKA</div>
-           </div>
-           <div style={{textAlign:"right"}}>
-             <div style={{display:"flex",alignItems:"center",gap:7,justifyContent:"flex-end"}}>
-               {refreshing
-                 ?<span style={{fontSize:13,color:O,animation:"spin .7s linear infinite",display:"inline-block"}}>↻</span>
-                 :<span style={{width:6,height:6,borderRadius:"50%",background:"#3a7a4a",display:"inline-block"}}/>
-               }
-               <span style={{fontSize:11,color:"#3a5a7a"}}>{refreshing?"Fetching live data…":`Refresh in ${countdown}s`}</span>
-             </div>
-             <div style={{fontSize:10,color:"#1e3a5f",marginTop:3}}>
-               ESPN Live · {lastRefresh.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}
-             </div>
-           </div>
-         </div>
-         <div style={{display:"flex",gap:4}}>
-           {navs.map(n=>(
-             <button key={n.id} className="nav-btn" onClick={()=>setTab(n.id)} style={{padding:"8px 18px",borderRadius:"8px 8px 0 0",border:"none",cursor:"pointer",background:tab===n.id?O:"transparent",color:tab===n.id?"#fff":"#4a6a8a",fontWeight:700,fontSize:13,fontFamily:"Georgia,serif"}}>
-               {n.label}
-             </button>
-           ))}
-         </div>
-       </div>
-     </div>
+      <div style={{background:`linear-gradient(180deg,${N} 0%,#0a1d35 100%)`,borderBottom:`3px solid ${O}`,padding:"0 20px",position:"sticky",top:0,zIndex:100}}>
+        <div style={{maxWidth:1080,margin:"0 auto"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0 10px"}}>
+            <div>
+              <div style={{fontSize:10,letterSpacing:4,color:O,textTransform:"uppercase",fontWeight:700}}>2026</div>
+              <div style={{fontSize:20,fontWeight:700,color:"#fff",lineHeight:1.15}}>College World Series</div>
+              <div style={{fontSize:10,color:"#3a5a7a",letterSpacing:2}}>OMAHA, NEBRASKA</div>
+            </div>
+            <div style={{textAlign:"right"}}>
+              <div style={{display:"flex",alignItems:"center",gap:7,justifyContent:"flex-end"}}>
+                {refreshing
+                  ?<span style={{fontSize:13,color:O,animation:"spin .7s linear infinite",display:"inline-block"}}>↻</span>
+                  :<span style={{width:6,height:6,borderRadius:"50%",background:"#3a7a4a",display:"inline-block"}}/>
+                }
+                <span style={{fontSize:11,color:"#3a5a7a"}}>{refreshing?"Fetching live data…":`Refresh in ${countdown}s`}</span>
+              </div>
+              <div style={{fontSize:10,color:"#1e3a5f",marginTop:3}}>
+                ESPN Live · {lastRefresh.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}
+              </div>
+            </div>
+          </div>
+          <div style={{display:"flex",gap:4}}>
+            {navs.map(n=>(
+              <button key={n.id} className="nav-btn" onClick={()=>setTab(n.id)} style={{padding:"8px 18px",borderRadius:"8px 8px 0 0",border:"none",cursor:"pointer",background:tab===n.id?O:"transparent",color:tab===n.id?"#fff":"#4a6a8a",fontWeight:700,fontSize:13,fontFamily:"Georgia,serif"}}>
+                {n.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
-     <div style={{maxWidth:1080,margin:"0 auto",padding:"24px 20px 60px"}}>
+      <div style={{maxWidth:1080,margin:"0 auto",padding:"24px 20px 60px"}}>
 
-       {tab==="scores" && (
-         <div style={{animation:"fadeIn .4s ease"}}>
-           {loading && (
-             <div style={{textAlign:"center",padding:60}}>
-               <span style={{fontSize:24,color:O,animation:"spin 1s linear infinite",display:"inline-block"}}>↻</span>
-               <div style={{color:"#3a5a7a",marginTop:12,fontSize:13}}>Loading live scores from ESPN…</div>
-             </div>
-           )}
-           {error && (
-             <div style={{background:"#1a0a0a",border:"1px solid #5a1a1a",borderRadius:10,padding:16,marginBottom:20,color:"#ff6666",fontSize:13}}>
-               ⚠ {error}
-             </div>
-           )}
-           {!loading && liveGames.length > 0 && (
-             <>
-               <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-                 <LiveDot/>
-                 <span style={{fontSize:13,fontWeight:700,color:O,letterSpacing:1,textTransform:"uppercase"}}>Live Now</span>
-               </div>
-               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:14,marginBottom:28}}>
-                 {liveGames.map(g=><ScoreCard key={g.id} g={g}/>)}
-               </div>
-             </>
-           )}
-           {!loading && todayGames.length > 0 && (
-             <>
-               <div style={{fontSize:11,color:"#3a5a7a",letterSpacing:3,textTransform:"uppercase",marginBottom:14}}>Upcoming Today</div>
-               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:14,marginBottom:28}}>
-                 {todayGames.map(g=><ScoreCard key={g.id} g={g}/>)}
-               </div>
-             </>
-           )}
-           {!loading && finalGames.length > 0 && (
-             <>
-               <div style={{fontSize:11,color:"#3a5a7a",letterSpacing:3,textTransform:"uppercase",marginBottom:14}}>Final Scores</div>
-               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:10}}>
-                 {finalGames.map(g=><ScoreCard key={g.id} g={g}/>)}
-               </div>
-             </>
-           )}
-           {!loading && !error && !hasGames && (
-             <div style={{textAlign:"center",padding:60}}>
-               <div style={{fontSize:40,marginBottom:16}}>⚾</div>
-               <div style={{color:"#c8d8f0",fontSize:18,fontWeight:700,marginBottom:8}}>No games scheduled today</div>
-               <div style={{color:"#3a5a7a",fontSize:13}}>Check back when the CWS is underway in Omaha!</div>
-             </div>
-           )}
-         </div>
-       )}
+        {tab==="scores" && (
+          <div style={{animation:"fadeIn .4s ease"}}>
+            {loading && (
+              <div style={{textAlign:"center",padding:60}}>
+                <span style={{fontSize:24,color:O,animation:"spin 1s linear infinite",display:"inline-block"}}>↻</span>
+                <div style={{color:"#3a5a7a",marginTop:12,fontSize:13}}>Loading live scores from ESPN…</div>
+              </div>
+            )}
+            {error && (
+              <div style={{background:"#1a0a0a",border:"1px solid #5a1a1a",borderRadius:10,padding:16,marginBottom:20,color:"#ff6666",fontSize:13}}>
+                ⚠ {error}
+              </div>
+            )}
+            {!loading && liveGames.length > 0 && (
+              <>
+                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+                  <LiveDot/>
+                  <span style={{fontSize:13,fontWeight:700,color:O,letterSpacing:1,textTransform:"uppercase"}}>Live Now</span>
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:14,marginBottom:28}}>
+                  {liveGames.map(g=><ScoreCard key={g.id} g={g}/>)}
+                </div>
+              </>
+            )}
+            {!loading && todayGames.length > 0 && (
+              <>
+                <div style={{fontSize:11,color:"#3a5a7a",letterSpacing:3,textTransform:"uppercase",marginBottom:14}}>Upcoming Today</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:14,marginBottom:28}}>
+                  {todayGames.map(g=><ScoreCard key={g.id} g={g}/>)}
+                </div>
+              </>
+            )}
+            {!loading && finalGames.length > 0 && (
+              <>
+                <div style={{fontSize:11,color:"#3a5a7a",letterSpacing:3,textTransform:"uppercase",marginBottom:14}}>Final Scores</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:10}}>
+                  {finalGames.map(g=><ScoreCard key={g.id} g={g}/>)}
+                </div>
+              </>
+            )}
+            {!loading && !error && !hasGames && (
+              <div style={{textAlign:"center",padding:60}}>
+                <div style={{fontSize:40,marginBottom:16}}>⚾</div>
+                <div style={{color:"#c8d8f0",fontSize:18,fontWeight:700,marginBottom:8}}>No games scheduled today</div>
+                <div style={{color:"#3a5a7a",fontSize:13}}>Check back when the 2026 CWS gets underway in Omaha!</div>
+              </div>
+            )}
+          </div>
+        )}
 
-       {tab==="bracket" && (
-         <div style={{animation:"fadeIn .4s ease"}}>
-           <div style={{display:"flex",gap:8,marginBottom:20,flexWrap:"wrap"}}>
-             {btabs.map(bt=>(
-               <button key={bt.id} onClick={()=>setBTab(bt.id)} style={{padding:"7px 16px",border:`1.5px solid ${bTab===bt.id?O:"#1e3a5f"}`,borderRadius:20,cursor:"pointer",background:bTab===bt.id?`${O}22`:"transparent",color:bTab===bt.id?O:"#4a6a8a",fontSize:12,fontWeight:600,fontFamily:"Georgia,serif"}}>
-                 {bt.label}
-               </button>
-             ))}
-           </div>
-           {bTab==="regionals" && (
-             <>
-               <p style={{fontSize:12,color:"#3a5a7a",marginBottom:14}}>Tap any regional to expand game-by-game results ↓</p>
-               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:10}}>
-                 {REGIONALS.map(r=><RegCard key={r.id} reg={r}/>)}
-               </div>
-             </>
-           )}
-           {bTab==="omaha" && (
-             <div style={{background:"#07162b",borderRadius:14,border:"1px solid #1a3050",padding:20}}>
-               <div style={{textAlign:"center",marginBottom:16,color:"#3a5a7a",fontSize:11,letterSpacing:3,textTransform:"uppercase"}}>Omaha — 2025 CWS Field</div>
-               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10}}>
-                 {[
-                   {name:"Miami",confirmed:true},{name:"Auburn",confirmed:true},
-                   {name:"Vanderbilt/A&M",confirmed:false},{name:"LSU/Ore. St.",confirmed:false},
-                   {name:"Florida/Tennessee",confirmed:false},{name:"Wake/UNC",confirmed:false},
-                   {name:"Clemson/Kentucky",confirmed:false},{name:"Arkansas/UCLA",confirmed:false},
-                 ].map((t,i)=>(
-                   <div key={i} className="card-hover" style={{background:t.name==="Auburn"?`linear-gradient(135deg,${O}33,#0a1d35)`:t.confirmed?"#0d2a12":"#0a1a2e",border:`1.5px solid ${t.name==="Auburn"?O:t.confirmed?"#3a7a4a":"#1a3050"}`,borderRadius:10,padding:"12px 14px",textAlign:"center"}}>
-                     <div style={{fontSize:13,fontWeight:700,color:t.name==="Auburn"?O:t.confirmed?"#7ec8a0":"#2a4a6a"}}>
-                       {t.name==="Auburn"?"🐯 ":""}{t.name}
-                     </div>
-                     {t.confirmed&&<div style={{fontSize:9,color:"#3a7a4a",marginTop:4,letterSpacing:2}}>QUALIFIED</div>}
-                   </div>
-                 ))}
-               </div>
-             </div>
-           )}
-         </div>
-       )}
+        {tab==="bracket" && (
+          <div style={{animation:"fadeIn .4s ease"}}>
+            <div style={{display:"flex",gap:8,marginBottom:20,flexWrap:"wrap"}}>
+              {btabs.map(bt=>(
+                <button key={bt.id} onClick={()=>setBTab(bt.id)} style={{padding:"7px 16px",border:`1.5px solid ${bTab===bt.id?O:"#1e3a5f"}`,borderRadius:20,cursor:"pointer",background:bTab===bt.id?`${O}22`:"transparent",color:bTab===bt.id?O:"#4a6a8a",fontSize:12,fontWeight:600,fontFamily:"Georgia,serif"}}>
+                  {bt.label}
+                </button>
+              ))}
+            </div>
+            {bTab==="regionals" && (
+              <>
+                <p style={{fontSize:12,color:"#3a5a7a",marginBottom:14}}>Tap any regional to expand game-by-game results ↓</p>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(290px,1fr))",gap:10}}>
+                  {REGIONALS.map(r=><RegCard key={r.id} reg={r}/>)}
+                </div>
+              </>
+            )}
+            {bTab==="omaha" && (
+              <div style={{background:"#07162b",borderRadius:14,border:"1px solid #1a3050",padding:20}}>
+                <div style={{textAlign:"center",marginBottom:16,color:"#3a5a7a",fontSize:11,letterSpacing:3,textTransform:"uppercase"}}>Omaha — 2026 CWS Field</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10}}>
+                  {Array.from({length:8}).map((_,i)=>(
+                    <div key={i} className="card-hover" style={{background:"#0a1a2e",border:"1.5px solid #1a3050",borderRadius:10,padding:"12px 14px",textAlign:"center"}}>
+                      <div style={{fontSize:13,fontWeight:700,color:"#2a4a6a"}}>TBD</div>
+                      <div style={{fontSize:9,color:"#1e3a5f",marginTop:4,letterSpacing:2}}>PENDING</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{textAlign:"center",marginTop:16,fontSize:11,color:"#3a5a7a"}}>
+                  Field will be set after Regionals & Super Regionals
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
-       {tab==="leaders" && (
-         <div style={{animation:"fadeIn .4s ease"}}>
-           <div style={{fontSize:13,fontWeight:700,color:O,letterSpacing:2,textTransform:"uppercase",marginBottom:14}}>Team Leaders</div>
-           <div style={{overflowX:"auto",marginBottom:30,borderRadius:10,border:"1px solid #1a3050"}}>
-             <table style={{minWidth:540}}>
-               <thead>
-                 <tr style={{background:"#091828"}}>
-                   {["Team","Avg","ERA","Runs","HR","Wins"].map(h=>(
-                     <th key={h} style={{padding:"10px 14px",textAlign:h==="Team"?"left":"center",color:"#3a5a7a",fontSize:10,letterSpacing:2,textTransform:"uppercase",fontWeight:600,borderBottom:`2px solid ${O}`}}>{h}</th>
-                   ))}
-                 </tr>
-               </thead>
-               <tbody>
-                 {TEAM_STATS.map((row,i)=>(
-                   <tr key={i} style={{background:row.team==="Auburn"?`${O}11`:i%2===0?"#07162b":"#091828",borderBottom:"1px solid #1a3050"}}>
-                     <td style={{padding:"10px 14px",fontWeight:row.team==="Auburn"?700:400,color:row.team==="Auburn"?O:"#c8d8f0",fontSize:13}}>
-                       {row.team==="Auburn"?"🐯 ":""}{row.team}
-                     </td>
-                     {[row.avg,row.era,row.runs,row.hr,row.wins].map((v,j)=>(
-                       <td key={j} style={{padding:"10px 14px",textAlign:"center",fontFamily:"monospace",color:"#c8d8f0",fontSize:13}}>{v}</td>
-                     ))}
-                   </tr>
-                 ))}
-               </tbody>
-             </table>
-           </div>
-           <div style={{fontSize:13,fontWeight:700,color:O,letterSpacing:2,textTransform:"uppercase",marginBottom:14}}>Individual Leaders</div>
-           <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
-             {ltabs.map(lt=>(
-               <button key={lt.id} onClick={()=>setLTab(lt.id)} style={{padding:"6px 16px",border:`1.5px solid ${lTab===lt.id?O:"#1e3a5f"}`,borderRadius:20,cursor:"pointer",background:lTab===lt.id?O:"transparent",color:lTab===lt.id?"#fff":"#4a6a8a",fontSize:12,fontWeight:700,fontFamily:"monospace"}}>
-                 {lt.label}
-               </button>
-             ))}
-           </div>
-           {IND[lTab].map((row,i)=><LeaderRow key={i} row={row} i={i}/>)}
-           <div style={{marginTop:20,padding:14,background:"#091828",borderRadius:8,border:"1px solid #1a3050",fontSize:11,color:"#3a5a7a",lineHeight:1.6}}>
-             ℹ️ Individual stats reflect season totals through the Super Regionals. Live game-by-game stats sourced from ESPN where available.
-           </div>
-         </div>
-       )}
-     </div>
+        {tab==="leaders" && (
+          <div style={{animation:"fadeIn .4s ease"}}>
+            <div style={{fontSize:13,fontWeight:700,color:O,letterSpacing:2,textTransform:"uppercase",marginBottom:14}}>Team Leaders</div>
+            <div style={{overflowX:"auto",marginBottom:30,borderRadius:10,border:"1px solid #1a3050"}}>
+              <table style={{minWidth:540}}>
+                <thead>
+                  <tr style={{background:"#091828"}}>
+                    {["Team","Avg","ERA","Runs","HR","Wins"].map(h=>(
+                      <th key={h} style={{padding:"10px 14px",textAlign:h==="Team"?"left":"center",color:"#3a5a7a",fontSize:10,letterSpacing:2,textTransform:"uppercase",fontWeight:600,borderBottom:`2px solid ${O}`}}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {TEAM_STATS.map((row,i)=>(
+                    <tr key={i} style={{background:row.team==="Auburn"?`${O}11`:i%2===0?"#07162b":"#091828",borderBottom:"1px solid #1a3050"}}>
+                      <td style={{padding:"10px 14px",fontWeight:row.team==="Auburn"?700:400,color:row.team==="Auburn"?O:"#c8d8f0",fontSize:13}}>
+                        {row.team==="Auburn"?"🐯 ":""}{row.team}
+                      </td>
+                      {[row.avg,row.era,row.runs,row.hr,row.wins].map((v,j)=>(
+                        <td key={j} style={{padding:"10px 14px",textAlign:"center",fontFamily:"monospace",color:"#c8d8f0",fontSize:13}}>{v}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div style={{fontSize:13,fontWeight:700,color:O,letterSpacing:2,textTransform:"uppercase",marginBottom:14}}>Individual Leaders</div>
+            <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
+              {ltabs.map(lt=>(
+                <button key={lt.id} onClick={()=>setLTab(lt.id)} style={{padding:"6px 16px",border:`1.5px solid ${lTab===lt.id?O:"#1e3a5f"}`,borderRadius:20,cursor:"pointer",background:lTab===lt.id?O:"transparent",color:lTab===lt.id?"#fff":"#4a6a8a",fontSize:12,fontWeight:700,fontFamily:"monospace"}}>
+                  {lt.label}
+                </button>
+              ))}
+            </div>
+            {IND[lTab].map((row,i)=><LeaderRow key={i} row={row} i={i}/>)}
+            <div style={{marginTop:20,padding:14,background:"#091828",borderRadius:8,border:"1px solid #1a3050",fontSize:11,color:"#3a5a7a",lineHeight:1.6}}>
+              ℹ️ Stats reflect 2026 season totals through the NCAA Tournament. Live scores sourced from ESPN.
+            </div>
+          </div>
+        )}
+      </div>
 
-     <div style={{borderTop:"1px solid #1a3050",padding:"14px 20px",textAlign:"center"}}>
-       <span style={{fontSize:10,color:"#1e3a5f",letterSpacing:3}}>WAR EAGLE 🐯 • CWS TRACKER • LIVE VIA ESPN • OMAHA 2025</span>
-     </div>
-   </div>
- );
+      <div style={{borderTop:"1px solid #1a3050",padding:"14px 20px",textAlign:"center"}}>
+        <span style={{fontSize:10,color:"#1e3a5f",letterSpacing:3}}>WAR EAGLE 🐯 • CWS TRACKER • LIVE VIA ESPN • OMAHA 2026</span>
+      </div>
+    </div>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
